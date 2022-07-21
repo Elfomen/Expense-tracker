@@ -39,7 +39,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   final List<Transaction> _transactions = [
     // Transaction(
     //     id: 't1', title: 'new shoes', amount: 69.99, date: DateTime.now()),
@@ -55,6 +55,25 @@ class _MyHomePageState extends State<MyHomePage> {
         .where((element) =>
             element.date.isAfter(DateTime.now().subtract(Duration(days: 7))))
         .toList();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+  }
+
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   void _addNewTransaction(String title, String amount, date) {
@@ -94,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final isLandScape = MediaQuery.of(context).orientation == Orientation.landscape;
     
     final transactionList = Container(
-                height: MediaQuery.of(context).size.height * 0.8,
+                height: MediaQuery.of(context).size.height * 0.7,
                 child: TransactionList(
                   transactions: _transactions,
                   deleteTransaction: _deleteTransaction,
@@ -142,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Platform.isIOS ? Container() :  FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () => openAddNewTransaction(context),
       ),
     );

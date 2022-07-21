@@ -42,6 +42,7 @@ class TransactionList extends StatelessWidget {
               itemCount: transactions.length,
               itemBuilder: (context, index) {
                 return Card(
+                  key: UniqueKey() ,
                   margin: EdgeInsets.symmetric(vertical: 8 , horizontal: 5),
                   child: ListTile(
                     leading: CircleAvatar(
@@ -72,40 +73,3 @@ class TransactionList extends StatelessWidget {
     );
   }
 }
-
-
-// Card(
-//                     child: Row(
-//                   children: [
-//                     Container(
-//                       margin:
-//                           EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-//                       child: Text(
-//                         '\$ ${transactions[index].amount.toString()}',
-//                         style: TextStyle(
-//                             fontWeight: FontWeight.bold,
-//                             fontSize: 20,
-//                             color: Theme.of(context).primaryColor),
-//                       ),
-//                       decoration: BoxDecoration(
-//                           border: Border.all(
-//                               color: Theme.of(context).primaryColor, width: 2)),
-//                       padding: EdgeInsets.all(10),
-//                     ),
-//                     Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         Text(
-//                           transactions[index].title,
-//                           style: const TextStyle(
-//                               fontSize: 16, fontWeight: FontWeight.bold),
-//                         ),
-//                         Text(
-//                           DateFormat.yMMMMd().format(transactions[index].date),
-//                           style: const TextStyle(color: Colors.grey),
-//                         )
-//                       ],
-//                     )
-//                   ],
-//                 )
-//               );
